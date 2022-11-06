@@ -9,6 +9,7 @@ public class SimpleMovement : MonoBehaviour
 	public float Speed = 0.0f;
 	public OVRCameraRig CameraRig;
 	public Text pinchDebug;
+	public Text thumbText;
 
 
 	public OVRHand leftHand;
@@ -20,6 +21,7 @@ public class SimpleMovement : MonoBehaviour
 	public event Action CameraUpdated;
 	public event Action PreCharacterMove;
 
+	public CallTowerManager ctm;
 
 	float initialHandSpacing = 0f;
 	bool inStroke = false;
@@ -28,6 +30,10 @@ public class SimpleMovement : MonoBehaviour
 
 	public bool leftFist = false;
 	public bool rightFist = false;
+
+	bool inCallingEmergency = false;
+	public bool leftThumbDown = false;
+	public bool rightThumbDown = false;
 
 	public void SetLeft(bool s)
 	{
@@ -48,6 +54,16 @@ public class SimpleMovement : MonoBehaviour
     {
 		rightFist = s;
     }
+
+	public void thumbsDownLeft(bool s)
+    {
+		leftThumbDown = s;
+    }
+
+	public void thumbsDownRight(bool s)
+	{
+		rightThumbDown = s;
+	}
 
 	// Need to do: accept to booleans for swim.
 	// Swim needs to check the distance between the two hands
@@ -78,6 +94,9 @@ public class SimpleMovement : MonoBehaviour
 			SwimMovement();
         }
 
+		thumbText.text = leftThumbDown.ToString() + ", " + rightThumbDown.ToString();
+
+		ThumbMovement();
 		StopAllMovement();
 	}
 
@@ -137,5 +156,47 @@ public class SimpleMovement : MonoBehaviour
         {
 			inStroke = false;
         }
+    }
+
+	void ThumbMovement()
+    {
+		if (leftThumbDown && rightThumbDown)
+        {
+			if (!inCallingEmergency)
+            {
+				inCallingEmergency = true;
+				StartCoroutine(CheckEmergency());
+            }
+        }
+    }
+
+	private IEnumerator CheckEmergency()
+    {
+		for (int i = 0; i < 5; i++) // check to make sure thumbs down for 10 seconds; do a check every second
+        {
+			thumbText.text = "Waiting for 2 seconds\n";
+			yield return new WaitForSeconds(1f); // wait 2 seconds
+			thumbText.text += "Checking gestures\n";
+
+			if (leftThumbDown && rightThumbDown)
+            {
+				thumbText.text += "Still Thumbs Down\n";
+				continue;
+            }
+			else
+            {
+				thumbText.text += "Gesture broken\n";
+				inCallingEmergency = false;
+				break;
+            }
+        }
+
+		if (inCallingEmergency)
+        {
+			ctm.CallCrewmate(ctm.GetEmergencyFrequency());
+			thumbText.text = "Calling Emergency Frequency\n";
+		}
+
+		inCallingEmergency = false;
     }
 }
