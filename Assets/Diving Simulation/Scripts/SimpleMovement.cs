@@ -8,9 +8,8 @@ public class SimpleMovement : MonoBehaviour
 {
 	public float Speed = 0.0f;
 	public OVRCameraRig CameraRig;
-	public Text pinchDebug;
-	public Text thumbText;
-
+	// public Text pinchDebug;
+	public Text emergencyText;
 
 	public OVRHand leftHand;
 	public OVRHand rightHand;
@@ -80,6 +79,7 @@ public class SimpleMovement : MonoBehaviour
 	void Start ()
 	{
 		initialGravity = Physics.gravity;
+		emergencyText.text = "";
 	}
 	
 	private void FixedUpdate()
@@ -94,8 +94,6 @@ public class SimpleMovement : MonoBehaviour
 			SwimMovement();
         }
 
-		thumbText.text = leftThumbDown.ToString() + ", " + rightThumbDown.ToString();
-
 		ThumbMovement();
 		StopAllMovement();
 	}
@@ -107,13 +105,13 @@ public class SimpleMovement : MonoBehaviour
 
 		if ((confidence == OVRHand.TrackingConfidence.High) && isIndexFingerPinching)
 		{
-			pinchDebug.text = "Pinching";
+			// pinchDebug.text = "Pinching";
 			playerRigidbody.MovePosition(playerRigidbody.position + leftHand.PointerPose.forward * Speed * Time.fixedDeltaTime);
 		}
-		else
-		{
-			pinchDebug.text = "Not";
-		}
+		// else
+		// {
+		// 	pinchDebug.text = "Not";
+		// }
 	}
 
 	void SwimMovement()
@@ -172,20 +170,16 @@ public class SimpleMovement : MonoBehaviour
 
 	private IEnumerator CheckEmergency()
     {
-		for (int i = 0; i < 5; i++) // check to make sure thumbs down for 10 seconds; do a check every second
+		for (int i = 0; i < 10; i++) // check to make sure thumbs down for 10 seconds; do a check every second
         {
-			thumbText.text = "Waiting for 2 seconds\n";
-			yield return new WaitForSeconds(1f); // wait 2 seconds
-			thumbText.text += "Checking gestures\n";
+			yield return new WaitForSeconds(1f);
 
-			if (leftThumbDown && rightThumbDown)
+			if (leftThumbDown && rightThumbDown) // gesture still being held
             {
-				thumbText.text += "Still Thumbs Down\n";
 				continue;
             }
-			else
+			else // gesture was broken
             {
-				thumbText.text += "Gesture broken\n";
 				inCallingEmergency = false;
 				break;
             }
@@ -193,10 +187,22 @@ public class SimpleMovement : MonoBehaviour
 
 		if (inCallingEmergency)
         {
-			ctm.CallCrewmate(ctm.GetEmergencyFrequency());
-			thumbText.text = "Calling Emergency Frequency\n";
+			StartCoroutine(CallEmergency());
 		}
 
 		inCallingEmergency = false;
     }
+
+	private IEnumerator CallEmergency()
+    {
+		ctm.CallCrewmate(ctm.GetEmergencyFrequency());
+
+		for (int i = 0; i < 5; i++)
+        {
+			yield return new WaitForSeconds(0.5f);
+			emergencyText.text = "Calling Emergency Frequency";
+			yield return new WaitForSeconds(0.5f);
+			emergencyText.text = "";
+		}
+	}
 }
