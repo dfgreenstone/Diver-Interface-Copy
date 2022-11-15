@@ -7,6 +7,8 @@ public class CallManager : MonoBehaviour
 {
     public Text dialBox;
     public bool callAllowed = false;
+    public GameObject ctm;
+    public GameObject planeScreen;
 
     private bool pressedNumber = false;
     private bool pressedDelete = false;
@@ -98,7 +100,47 @@ public class CallManager : MonoBehaviour
         if (dialBox.text.Length == 4)
         {
             callAllowed = true;
+            int callFrequency = int.Parse(dialBox.text);
+
             //need to check if frequency is in range, and if not, give an error message
+            // get list of frequencies from the call tower manager
+            CallTowerManager callTowerManager = ctm.GetComponent<CallTowerManager>();
+            int[] allowedFrequencies = callTowerManager.crewmateFrequencies;
+
+            for (int i = 0; i < allowedFrequencies.Length; i++)
+            {
+                if (callFrequency == allowedFrequencies[i])
+                {
+                    // make call
+                    // NEED TO CHECK FOR GESTURE
+                    callTowerManager.CallCrewmate(callFrequency).Play;
+                    
+                    MainScreenAnimator msa = planeScreen.GetComponent<MainScreenAnimator>();
+                    msa.ToCallingPage(callFrequency);
+
+                    return;
+                }
+            }
+
+            if (callFrequency == 1001)
+            {
+                //emergency frequency
+                //make emergency call
+                //NEED TO CHECK FOR GESTURE
+                callTowerManager.CallCrewmate(1001).Play;
+
+                MainScreenAnimator msa = planeScreen.GetComponent<MainScreenAnimator>();
+                msa.ToCallingPage(callFrequency);
+
+                return;
+            }
+            else
+            {
+                // give an error message
+            }
+
+
+
         }
         else 
         {

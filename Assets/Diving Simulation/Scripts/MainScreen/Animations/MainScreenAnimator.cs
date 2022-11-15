@@ -80,7 +80,7 @@ public class MainScreenAnimator : MonoBehaviour
         state = RouteSetPage;
     }
 
-    public void ToCallingPage()
+    public void ToCallingPage(int callFrequency)
     {
         state = CallingPage;
     }
