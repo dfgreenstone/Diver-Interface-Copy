@@ -70,4 +70,19 @@ public class SimpleDial : MonoBehaviour
             isIncomingCall = false;
         }
     }
+
+    public bool CheckBusy()
+    {
+        return isBusy;
+    }
+
+    public bool CheckIncoming()
+    {
+        return isIncomingCall;
+    }
+
+    public int CheckInFreq()
+    {
+        return incomingCallerFrequency;
+    }
 }
