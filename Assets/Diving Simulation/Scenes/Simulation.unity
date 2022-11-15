@@ -613,6 +613,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1625847569}
     m_Modifications:
+    - target: {fileID: 1068959377989412370, guid: ff5e50bf2c0ad4da09c36078a56351df,
+        type: 3}
+      propertyPath: phone
+      value: 
+      objectReference: {fileID: 1650857107}
     - target: {fileID: 1068959377989412381, guid: ff5e50bf2c0ad4da09c36078a56351df,
         type: 3}
       propertyPath: m_Enabled

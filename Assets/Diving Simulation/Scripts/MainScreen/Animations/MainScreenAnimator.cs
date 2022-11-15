@@ -10,6 +10,8 @@ public class MainScreenAnimator : MonoBehaviour
     private int state;
     public int contactSelected = -1; //-1 means none selected
 
+    public GameObject phone;
+
     void Awake()
     {
         _anim = GetComponent<Animator>();
@@ -22,10 +24,29 @@ public class MainScreenAnimator : MonoBehaviour
     void Update()
     {
         if (state == _currentState) return;
-        _anim.CrossFade(state, 0, 0);
-        _currentState = state;
+        StartCoroutine(SwitchMenu());
+        
     }
 
+    private IEnumerator SwitchMenu()
+    {
+        yield return new WaitForSeconds(1f);
+        _anim.CrossFade(state, 0, 0);
+        _currentState = state;
+
+        //foreach (Collider collider in phone.GetComponentsInChildren<Collider>())
+        //{
+        //    collider.enabled = false;
+        //}
+
+        //yield return new WaitForSeconds(1f);
+
+        //foreach (Collider collider in phone.GetComponentsInChildren<Collider>())
+        //{
+        //    collider.enabled = true;
+        //}
+    }
+    
     // Functions to update state
     public void ToMainMenu()
     {

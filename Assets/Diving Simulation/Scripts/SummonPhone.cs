@@ -57,6 +57,14 @@ public class SummonPhone : MonoBehaviour
         if (phone.activeInHierarchy != phoneEnabled)
         {
             phone.SetActive(phoneEnabled);
+
+            //if (phoneEnabled)
+            //{
+            //    foreach (Collider collider in phone.GetComponentsInChildren<Collider>())
+            //    {
+            //        collider.enabled = true;
+            //    }
+            //}
         }
     }
 }
