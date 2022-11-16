@@ -620,9 +620,24 @@ PrefabInstance:
       objectReference: {fileID: 1650857107}
     - target: {fileID: 1068959377989412370, guid: ff5e50bf2c0ad4da09c36078a56351df,
         type: 3}
+      propertyPath: callPageText
+      value: 
+      objectReference: {fileID: 36040236}
+    - target: {fileID: 1068959377989412370, guid: ff5e50bf2c0ad4da09c36078a56351df,
+        type: 3}
+      propertyPath: simpledialer
+      value: 
+      objectReference: {fileID: 274226410}
+    - target: {fileID: 1068959377989412370, guid: ff5e50bf2c0ad4da09c36078a56351df,
+        type: 3}
       propertyPath: contactNumber
       value: 
       objectReference: {fileID: 79810714}
+    - target: {fileID: 1068959377989412370, guid: ff5e50bf2c0ad4da09c36078a56351df,
+        type: 3}
+      propertyPath: callTowerManager
+      value: 
+      objectReference: {fileID: 1901407916}
     - target: {fileID: 1068959377989412381, guid: ff5e50bf2c0ad4da09c36078a56351df,
         type: 3}
       propertyPath: m_Enabled
@@ -672,6 +687,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 67.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068959378200929006, guid: ff5e50bf2c0ad4da09c36078a56351df,
+        type: 3}
+      propertyPath: InteractableStateChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068959378200929006, guid: ff5e50bf2c0ad4da09c36078a56351df,
+        type: 3}
+      propertyPath: InteractableStateChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068959378200929006, guid: ff5e50bf2c0ad4da09c36078a56351df,
+        type: 3}
+      propertyPath: InteractableStateChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 36040243}
+    - target: {fileID: 1068959378200929006, guid: ff5e50bf2c0ad4da09c36078a56351df,
+        type: 3}
+      propertyPath: InteractableStateChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToCallingPage
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068959378200929006, guid: ff5e50bf2c0ad4da09c36078a56351df,
+        type: 3}
+      propertyPath: InteractableStateChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MainScreenAnimator, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068959378200929006, guid: ff5e50bf2c0ad4da09c36078a56351df,
+        type: 3}
+      propertyPath: InteractableStateChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1068959378200929007, guid: ff5e50bf2c0ad4da09c36078a56351df,
         type: 3}
@@ -873,6 +918,41 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -21
       objectReference: {fileID: 0}
+    - target: {fileID: 1068959379898659411, guid: ff5e50bf2c0ad4da09c36078a56351df,
+        type: 3}
+      propertyPath: InteractableStateChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068959379898659411, guid: ff5e50bf2c0ad4da09c36078a56351df,
+        type: 3}
+      propertyPath: InteractableStateChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068959379898659411, guid: ff5e50bf2c0ad4da09c36078a56351df,
+        type: 3}
+      propertyPath: InteractableStateChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068959379898659411, guid: ff5e50bf2c0ad4da09c36078a56351df,
+        type: 3}
+      propertyPath: InteractableStateChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 36040237}
+    - target: {fileID: 1068959379898659411, guid: ff5e50bf2c0ad4da09c36078a56351df,
+        type: 3}
+      propertyPath: InteractableStateChanged.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068959379898659411, guid: ff5e50bf2c0ad4da09c36078a56351df,
+        type: 3}
+      propertyPath: InteractableStateChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ContactPageToRouteSetPage
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068959379898659411, guid: ff5e50bf2c0ad4da09c36078a56351df,
+        type: 3}
+      propertyPath: InteractableStateChanged.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: MainScreenAnimator, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 1068959379898659420, guid: ff5e50bf2c0ad4da09c36078a56351df,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -943,6 +1023,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &36040243 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1068959377989412370, guid: ff5e50bf2c0ad4da09c36078a56351df,
+    type: 3}
+  m_PrefabInstance: {fileID: 36040235}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36040237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8186a74ecb90341ecad60ac66176375f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &42149504

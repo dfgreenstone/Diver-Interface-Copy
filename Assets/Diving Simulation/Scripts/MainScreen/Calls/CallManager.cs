@@ -108,7 +108,7 @@ public class CallManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (dialBox.text.Length == 4)
+        if (dialBox.text.Length == 3 || dialBox.text.Length == 4)
         {
             bool isIndexFingerPinching = leftHand.GetFingerIsPinching(OVRHand.HandFinger.Index);
             OVRHand.TrackingConfidence confidence = leftHand.GetFingerConfidence(OVRHand.HandFinger.Index);
@@ -148,7 +148,7 @@ public class CallManager : MonoBehaviour
 
                 sm.QuickDial(callFrequency);
                 MainScreenAnimator msa = planeScreen.GetComponent<MainScreenAnimator>();
-                msa.ToCallingPage(callFrequency);
+                msa.ToCallingPage();
             }   
         }
         else 

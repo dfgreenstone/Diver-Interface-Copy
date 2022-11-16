@@ -12,7 +12,10 @@ public class MainScreenAnimator : MonoBehaviour
     //public int contactSelected = -1; //-1 means none selected
 
     public GameObject phone;
+    public GameObject callTowerManager;
+    public GameObject simpledialer;
     public Text contactNumber;
+    public Text callPageText;
 
     void Awake()
     {
@@ -81,14 +84,29 @@ public class MainScreenAnimator : MonoBehaviour
 
     public void ToRouteSetPage(int pageNumber)
     {
-        // contactSelected = pageNumber; // use this to set a route to a contact << may need to change this to some other argument type
         contactNumber.text = pageNumber.ToString();
         state = RouteSetPage;
     }
 
-    public void ToCallingPage(int callFrequency)
+    public void ContactPageToRouteSetPage()
     {
+        state = RouteSetPage;
+    }
+
+    public void ToCallingPage()
+    {
+        CallTowerManager ctm = callTowerManager.GetComponent<CallTowerManager>();
+        SimpleDial sm = simpledialer.GetComponent<SimpleDial>();
+
+        int[] allowedFrequencies = ctm.crewmateFrequencies;
+        CrewInfo[] crewInfo = ctm.GetCrewmatesInformation();
+
+        string name = crewInfo[int.Parse(contactNumber.text)].name;
+        int frequency = allowedFrequencies[int.Parse(contactNumber.text)];
+
+        callPageText.text = "Calling " + name;
         state = CallingPage;
+        sm.QuickDial(frequency);
     }
 
     #region Cached Properties
