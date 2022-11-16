@@ -100,13 +100,13 @@ public class SimpleMovement : MonoBehaviour
 
 	void PinchMovement ()
     {
-		bool isIndexFingerPinching = leftHand.GetFingerIsPinching(OVRHand.HandFinger.Index);
-		OVRHand.TrackingConfidence confidence = leftHand.GetFingerConfidence(OVRHand.HandFinger.Index);
+		bool isIndexFingerPinching = rightHand.GetFingerIsPinching(OVRHand.HandFinger.Index);
+		OVRHand.TrackingConfidence confidence = rightHand.GetFingerConfidence(OVRHand.HandFinger.Index);
 
 		if ((confidence == OVRHand.TrackingConfidence.High) && isIndexFingerPinching)
 		{
 			// pinchDebug.text = "Pinching";
-			playerRigidbody.MovePosition(playerRigidbody.position + leftHand.PointerPose.forward * Speed * Time.fixedDeltaTime);
+			playerRigidbody.MovePosition(playerRigidbody.position + rightHand.PointerPose.forward * Speed * Time.fixedDeltaTime);
 		}
 		// else
 		// {

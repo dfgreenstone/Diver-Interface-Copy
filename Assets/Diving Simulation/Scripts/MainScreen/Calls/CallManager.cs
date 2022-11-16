@@ -7,12 +7,23 @@ public class CallManager : MonoBehaviour
 {
     public Text dialBox;
     public bool callAllowed = false;
+
+    public OVRHand leftHand;
+
     public GameObject ctm;
+    public GameObject simpledialer;
     public GameObject planeScreen;
 
     private bool pressedNumber = false;
     private bool pressedDelete = false;
     private bool pressedClear = false;
+
+    public Text callPageText;
+
+    private void Awake()
+    {
+        if (leftHand == null) leftHand = GetComponent<OVRHand>();
+    }
 
     public void PressNumber(int number)
     {
@@ -95,52 +106,50 @@ public class CallManager : MonoBehaviour
         pressedClear = false;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (dialBox.text.Length == 4)
         {
-            callAllowed = true;
-            int callFrequency = int.Parse(dialBox.text);
+            bool isIndexFingerPinching = leftHand.GetFingerIsPinching(OVRHand.HandFinger.Index);
+            OVRHand.TrackingConfidence confidence = leftHand.GetFingerConfidence(OVRHand.HandFinger.Index);
 
-            //need to check if frequency is in range, and if not, give an error message
-            // get list of frequencies from the call tower manager
-            CallTowerManager callTowerManager = ctm.GetComponent<CallTowerManager>();
-            int[] allowedFrequencies = callTowerManager.crewmateFrequencies;
-
-            for (int i = 0; i < allowedFrequencies.Length; i++)
+            if ((confidence == OVRHand.TrackingConfidence.High) && isIndexFingerPinching)
             {
-                if (callFrequency == allowedFrequencies[i])
+                callAllowed = true;
+                int callFrequency = int.Parse(dialBox.text);
+
+                CallTowerManager callTowerManager = ctm.GetComponent<CallTowerManager>();
+                SimpleDial sm = simpledialer.GetComponent<SimpleDial>();
+
+                int[] allowedFrequencies = callTowerManager.crewmateFrequencies;
+                CrewInfo[] crewInfo = callTowerManager.GetCrewmatesInformation();
+
+                callPageText.text = "";
+
+                for (int i = 0; i < allowedFrequencies.Length; i++)
                 {
-                    // make call
-                    // NEED TO CHECK FOR GESTURE
-                    callTowerManager.CallCrewmate(callFrequency).Play;
-                    
-                    MainScreenAnimator msa = planeScreen.GetComponent<MainScreenAnimator>();
-                    msa.ToCallingPage(callFrequency);
-
-                    return;
+                    if (callFrequency == allowedFrequencies[i])
+                    {
+                        callPageText.text = "Calling " + crewInfo[i].name;
+                    }
                 }
-            }
 
-            if (callFrequency == 1001)
-            {
-                //emergency frequency
-                //make emergency call
-                //NEED TO CHECK FOR GESTURE
-                callTowerManager.CallCrewmate(1001).Play;
+                if (callPageText.text.Length == 0)
+                {
+                    if (callFrequency == callTowerManager.GetEmergencyFrequency())
+                    {
+                        callPageText.text = "Calling Emergency";
+                    }
+                    else
+                    {
+                        callPageText.text = "Calling Unknown";
+                    }
+                }
 
+                sm.QuickDial(callFrequency);
                 MainScreenAnimator msa = planeScreen.GetComponent<MainScreenAnimator>();
                 msa.ToCallingPage(callFrequency);
-
-                return;
-            }
-            else
-            {
-                // give an error message
-            }
-
-
-
+            }   
         }
         else 
         {
