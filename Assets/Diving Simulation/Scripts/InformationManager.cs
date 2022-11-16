@@ -22,7 +22,7 @@ public class InformationManager : MonoBehaviour
     // Battery info
     private float batteryLevelMax = 100f;
     private float currentBatteryLevel = 100f;
-    private float batteryConsumptionRate = -0.8f; // in batt/second.
+    private float batteryConsumptionRate = -0.35f; // in batt/second.
     
     /*
      * INFORMATION RETRIEVAL FUNCTIONS
