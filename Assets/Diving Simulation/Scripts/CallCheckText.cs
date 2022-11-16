@@ -7,7 +7,10 @@ public class CallCheckText : MonoBehaviour
 
     private bool isBusy, isIncomingCall;
     public GameObject simpleDialer;
+    
     public OVRHand leftHand;
+    public bool leftFist;
+
     SimpleDial playerTransmitter;
     public TextMesh tM;
 
@@ -46,10 +49,20 @@ public class CallCheckText : MonoBehaviour
             tM.color = Color.red;
             tM.text = "In a call.";
             tM.GetComponent<MeshRenderer>().enabled = true;
+
+            if (leftFist)
+            {
+                playerTransmitter.HangUp();
+            }
         }
 
         else {
             tM.GetComponent<MeshRenderer>().enabled = false;
         }
+    }
+
+    public void leftFistClenched(bool s)
+    {
+        leftFist = s;
     }
 }

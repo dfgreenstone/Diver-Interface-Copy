@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainScreenAnimator : MonoBehaviour
 {
@@ -8,14 +9,17 @@ public class MainScreenAnimator : MonoBehaviour
     private SpriteRenderer _renderer;
 
     private int state;
-    public int contactSelected = -1; //-1 means none selected
+    //public int contactSelected = -1; //-1 means none selected
 
     public GameObject phone;
+    public Text contactNumber;
 
     void Awake()
     {
         _anim = GetComponent<Animator>();
-        _renderer = GetComponent<SpriteRenderer>(); 
+        _renderer = GetComponent<SpriteRenderer>();
+
+        contactNumber.text = "0";
 
         state = MainMenu;
     }
@@ -70,13 +74,15 @@ public class MainScreenAnimator : MonoBehaviour
 
     public void ToContactPage(int pageNumber)
     {
-        contactSelected = pageNumber; // use this number for the ContactInfoManager, need some way to reset ? maybe? when you leave the contact page (back, make call, make route)
+        // contactSelected = pageNumber; // use this number for the ContactInfoManager, need some way to reset ? maybe? when you leave the contact page (back, make call, make route)
+        contactNumber.text = pageNumber.ToString();
         state = ContactPage;
     }
 
     public void ToRouteSetPage(int pageNumber)
     {
-        contactSelected = pageNumber; // use this to set a route to a contact << may need to change this to some other argument type
+        // contactSelected = pageNumber; // use this to set a route to a contact << may need to change this to some other argument type
+        contactNumber.text = pageNumber.ToString();
         state = RouteSetPage;
     }
 
