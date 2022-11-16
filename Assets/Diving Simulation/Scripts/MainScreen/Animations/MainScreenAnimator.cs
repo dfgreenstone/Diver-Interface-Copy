@@ -9,13 +9,14 @@ public class MainScreenAnimator : MonoBehaviour
     private SpriteRenderer _renderer;
 
     private int state;
-    //public int contactSelected = -1; //-1 means none selected
 
     public GameObject phone;
     public GameObject callTowerManager;
     public GameObject simpledialer;
+    public GameObject arrow;
     public Text contactNumber;
     public Text callPageText;
+    public Text distanceText;
 
     void Awake()
     {
@@ -32,7 +33,7 @@ public class MainScreenAnimator : MonoBehaviour
     {
         if (state == _currentState) return;
         StartCoroutine(SwitchMenu());
-        
+
     }
 
     private IEnumerator SwitchMenu()
@@ -40,20 +41,8 @@ public class MainScreenAnimator : MonoBehaviour
         yield return new WaitForSeconds(1f);
         _anim.CrossFade(state, 0, 0);
         _currentState = state;
-
-        //foreach (Collider collider in phone.GetComponentsInChildren<Collider>())
-        //{
-        //    collider.enabled = false;
-        //}
-
-        //yield return new WaitForSeconds(1f);
-
-        //foreach (Collider collider in phone.GetComponentsInChildren<Collider>())
-        //{
-        //    collider.enabled = true;
-        //}
     }
-    
+
     // Functions to update state
     public void ToMainMenu()
     {
@@ -77,20 +66,23 @@ public class MainScreenAnimator : MonoBehaviour
 
     public void ToContactPage(int pageNumber)
     {
-        // contactSelected = pageNumber; // use this number for the ContactInfoManager, need some way to reset ? maybe? when you leave the contact page (back, make call, make route)
         contactNumber.text = pageNumber.ToString();
         state = ContactPage;
+        arrow.SetActive(false);
+        distanceText.text = "";
     }
 
     public void ToRouteSetPage(int pageNumber)
     {
         contactNumber.text = pageNumber.ToString();
         state = RouteSetPage;
+        arrow.SetActive(true);
     }
 
     public void ContactPageToRouteSetPage()
     {
         state = RouteSetPage;
+        arrow.SetActive(true);
     }
 
     public void ToCallingPage()
