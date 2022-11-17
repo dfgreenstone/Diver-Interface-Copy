@@ -85,20 +85,27 @@ public class MainScreenAnimator : MonoBehaviour
         arrow.SetActive(true);
     }
 
-    public void ToCallingPage()
+    public void ToCallingPage(bool mainCall)
     {
-        CallTowerManager ctm = callTowerManager.GetComponent<CallTowerManager>();
-        SimpleDial sm = simpledialer.GetComponent<SimpleDial>();
+        if (mainCall)
+        {
+            CallTowerManager ctm = callTowerManager.GetComponent<CallTowerManager>();
+            SimpleDial sm = simpledialer.GetComponent<SimpleDial>();
 
-        int[] allowedFrequencies = ctm.crewmateFrequencies;
-        CrewInfo[] crewInfo = ctm.GetCrewmatesInformation();
+            int[] allowedFrequencies = ctm.crewmateFrequencies;
+            CrewInfo[] crewInfo = ctm.GetCrewmatesInformation();
 
-        string name = crewInfo[int.Parse(contactNumber.text)].name;
-        int frequency = allowedFrequencies[int.Parse(contactNumber.text)];
+            string name = crewInfo[int.Parse(contactNumber.text)].name;
+            int frequency = allowedFrequencies[int.Parse(contactNumber.text)];
 
-        callPageText.text = "Calling " + name;
-        state = CallingPage;
-        sm.QuickDial(frequency);
+            callPageText.text = "Calling " + name;
+            state = CallingPage;
+            sm.QuickDial(frequency);
+        }
+        else
+        {
+            state = CallingPage;
+        }
     }
 
     #region Cached Properties

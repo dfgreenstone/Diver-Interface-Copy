@@ -723,7 +723,7 @@ PrefabInstance:
     - target: {fileID: 1068959378200929006, guid: ff5e50bf2c0ad4da09c36078a56351df,
         type: 3}
       propertyPath: InteractableStateChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1068959378200929006, guid: ff5e50bf2c0ad4da09c36078a56351df,
         type: 3}
@@ -739,6 +739,11 @@ PrefabInstance:
         type: 3}
       propertyPath: InteractableStateChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: MainScreenAnimator, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068959378200929006, guid: ff5e50bf2c0ad4da09c36078a56351df,
+        type: 3}
+      propertyPath: InteractableStateChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1068959378200929006, guid: ff5e50bf2c0ad4da09c36078a56351df,
         type: 3}
@@ -36934,6 +36939,7 @@ MonoBehaviour:
   playerRigidbody: {fileID: 3446047718551889953}
   infMan: {fileID: 746461937}
   ctm: {fileID: 1901407917}
+  simpleDialer: {fileID: 274226410}
   leftFlat: 0
   rightFlat: 0
   leftFist: 0

@@ -21,6 +21,7 @@ public class SimpleMovement : MonoBehaviour
 	public event Action PreCharacterMove;
 
 	public CallTowerManager ctm;
+	public GameObject simpleDialer;
 
 	float initialHandSpacing = 0f;
 	bool inStroke = false;
@@ -170,7 +171,7 @@ public class SimpleMovement : MonoBehaviour
 
 	private IEnumerator CheckEmergency()
     {
-		for (int i = 0; i < 10; i++) // check to make sure thumbs down for 10 seconds; do a check every second
+		for (int i = 0; i < 5; i++) // check to make sure thumbs down for 5 seconds; do a check every second
         {
 			yield return new WaitForSeconds(1f);
 
@@ -195,7 +196,9 @@ public class SimpleMovement : MonoBehaviour
 
 	private IEnumerator CallEmergency()
     {
-		ctm.CallCrewmate(ctm.GetEmergencyFrequency());
+		SimpleDial sm = simpleDialer.GetComponent<SimpleDial>();
+		sm.QuickDial(ctm.GetEmergencyFrequency());
+		// ctm.CallCrewmate(ctm.GetEmergencyFrequency());
 
 		for (int i = 0; i < 5; i++)
         {

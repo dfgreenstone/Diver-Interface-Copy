@@ -148,7 +148,7 @@ public class CallManager : MonoBehaviour
 
                 sm.QuickDial(callFrequency);
                 MainScreenAnimator msa = planeScreen.GetComponent<MainScreenAnimator>();
-                msa.ToCallingPage();
+                msa.ToCallingPage(false);
             }   
         }
         else 
